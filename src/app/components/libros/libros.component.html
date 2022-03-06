@@ -1,0 +1,95 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="titulo">LIBROS</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo">{{ accion | uppercase}} LIBROS</h5>
+
+                    <form [formGroup]="form" (ngSubmit)="guardarLibro()">
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text"> 
+                                <i class="fas fa-user"[class.green-icon]="this.form.get('titulo')?.valid"
+                                [class.red-icon]="this.form.get('titulo')?.invalid && this.form.get('titulo')?.touched"></i>
+                                
+                            </span>
+                            <input formControlName="titulo" type="text" class="form-control" placeholder="Titulo">
+                        </div>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text"> 
+                                <i class="fas fa-user"[class.green-icon]="this.form.get('autor')?.valid"
+                                [class.red-icon]="this.form.get('autor')?.invalid && this.form.get('autor')?.touched"></i>
+                            </span>
+                            <input formControlName="autor" type="text" class="form-control" placeholder="Autor">
+                        </div>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text"> 
+                                <i class="fa-solid fa-book"[class.green-icon]="this.form.get('genero')?.valid"
+                                [class.red-icon]="this.form.get('genero')?.invalid && this.form.get('genero')?.touched"></i>
+                            </span>
+                            <input formControlName="genero" type="text" class="form-control" placeholder="Genero">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="input-group input-group-lg mb-3">
+                                    <span class="input-group-text"> 
+                                        <i class="fa-solid fa-hashtag"[class.green-icon]="this.form.get('edicion')?.valid"
+                                        [class.red-icon]="this.form.get('edicion')?.invalid && this.form.get('edicion')?.touched"></i>
+                                    </span>
+                                    <input formControlName="edicion" type="number" class="form-control" placeholder="Edicion">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <div class="input-group input-group-lg mb-3">
+                                    <span class="input-group-text"> 
+                                    <i class="fa-solid fa-calendar"[class.green-icon]="this.form.get('fechaPublicacion')?.valid"
+                                    [class.red-icon]="this.form.get('fechaPublicacion')?.invalid && this.form.get('fechaPublicacion')?.touched"></i>
+                                </span>
+                                    <input formControlName="fechaPublicacion" maxlength="10" type="date" class="form-control" placeholder="FechaPublicacion">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button [disabled]="this.form.invalid" type="submit" class="btn btn-success btn-lg">
+                                <i class="fa-solid fa-database"></i>&nbsp; Aceptar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="col lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo">LISTADO DE LIBROS</h5>
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let libro of listLibros;">
+                                <td>{{libro.titulo}}</td>
+                                <td>{{libro.autor}}</td>
+                                <td>{{libro.genero}}</td>
+                                <td>{{libro.edicion}}</td>
+                                <td>{{libro.fechaPublicacion}}</td>
+                                <td>
+                                    <i (click)="editarLibro(libro)" class="far fa-pen-to-square text-info"></i>
+                                </td>
+                                <td>
+                                    <i (click)="eliminarLibro(libro.id)" class="far fa-trash-can text-danger"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
