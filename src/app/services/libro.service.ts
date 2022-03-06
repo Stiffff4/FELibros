@@ -5,25 +5,27 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class LibroService {
   private myAppUrl = 'https://localhost:44334/';
-  private myApiUrl = 'api/libro/';
+  private myApiUrl = 'api/Libro/';
 
   constructor(private http: HttpClient) { }
+
   getListLibros(): Observable<any>{
-    return this.http.get(this.myAppUrl + this.myApiUrl);
+    return this.http.get(this.myAppUrl + this.myApiUrl + "ObtenerLibros");
   }
 
 
   deleteLibro(id: number): Observable<any>{
-return this.http.delete(this.myAppUrl + this.myApiUrl + id);
+    return this.http.delete(this.myAppUrl + this.myApiUrl + "EliminarLibro/" + id);
   }
 
   saveLibro(libro: any): Observable<any>{
-return this.http.post(this.myAppUrl + this.myApiUrl, libro);
+    return this.http.post(this.myAppUrl + this.myApiUrl + "AgregarLibro", libro);
   }
 
-updateLibro(id: number, libro: any): Observable<any>{
-return this.http.put(this.myAppUrl + this.myApiUrl + id, libro);
-}
+  updateLibro(id: number, libro: any): Observable<any>{
+    return this.http.put(this.myAppUrl + this.myApiUrl + "EliminarLibro/" + id, libro);
+  }
 }
